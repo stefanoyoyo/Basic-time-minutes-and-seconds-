@@ -8,7 +8,10 @@ export class IndexedDbService {
 
   public save(toSave: number) {
     const cols: ObjectStoreColumns[] = ObjectStoreColumns.getTestModel()
-    this.createObjectStore('ciao', 'Person', cols  ) 
+    // this.createObjectStore('ciao', 'Person', cols  );
+
+    // aggiustare
+    const obj = this.getObjectStore('ciao', 'Person');
   }
 
   // #region API
@@ -47,10 +50,8 @@ export class IndexedDbService {
 
     /**Getting the table of the specified database */
     public getObjectStore(nameIndexedDb: string, nameObjectStore: string) {
-
       // Opening the dtaabase and getting the promise 
       var request = window.indexedDB.open(nameIndexedDb, 1);
-  
       // Getting the table of the specified database
       request.onupgradeneeded = event => {
         var db = Object.assign(event.target).result;
