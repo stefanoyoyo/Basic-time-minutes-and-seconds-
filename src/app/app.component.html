@@ -3,7 +3,7 @@
   Start editing to see some magic happen :)
 </p>
 
-<input type="text" placeholder="Inserisci tempo in minuti" [ngModel]="minutes">
+<input type="text" placeholder="Inserisci tempo in minuti" [(ngModel)]="minutes">
 <input (click)="start()" type="button" value="start" />
 
 <p *ngIf="minutes != -1 && seconds != -1" id="time">{{minutes}}:{{seconds < 10 ? '0' + seconds : seconds}}</p>
