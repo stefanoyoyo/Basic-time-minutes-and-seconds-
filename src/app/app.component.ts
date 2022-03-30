@@ -1,4 +1,5 @@
 import { Component, VERSION } from '@angular/core';
+import { IndexedDbService } from './Services/indexedDb.service';
 
 @Component({
   selector: 'my-app',
@@ -10,6 +11,7 @@ export class AppComponent  {
 
   minutes: number = 20;
   seconds: number = -1;
+  constructor(private indexedDb: IndexedDbService) {}
 
   // #region methods
 
@@ -24,6 +26,8 @@ export class AppComponent  {
         this.seconds = 59;
         this.minutes--;
       }
+
+      this.indexedDb.save(new Date().getTime());
 
     }, 1000)
   }
