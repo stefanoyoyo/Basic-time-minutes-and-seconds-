@@ -31,8 +31,8 @@ export class IndexedDbService {
         return null;
     }
 
-    /* request type is IDBOpenDBRequest */
-    var request = window.indexedDB.open(name, 1); 
+    /* request type is IDBOpenDBRequest, a promise to resolve */
+    var request = window.indexedDB.open(name, 1) as IDBOpenDBRequest; 
 
     let el = null;
     const myPromise = new Promise((resolve, reject) => { 
