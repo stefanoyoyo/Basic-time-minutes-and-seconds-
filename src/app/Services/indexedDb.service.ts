@@ -5,9 +5,13 @@ import { ObjectStoreColumns } from '../model/objectStoreColumns.model';
   providedIn: 'root',
 })
 export class IndexedDbService {
-
-  // #region REUSABLE CODE
-  /** Region of reusable code also working in other projects.  */
+/**
+ * NOTE: 
+ *  • IDBOpenDBRequest: object handling the indexedDb request, providing its response with 2 events
+ *    • onsuccess: events emitting the indexedDb 
+ *    • onerror: event emitting the error
+ *  • IDBDatabase: object includind the indexedDb
+ */
 
   public isIndexedDbAvailable(): boolean {
     if (!('indexedDB' in window)) {
@@ -119,7 +123,6 @@ export class IndexedDbService {
       return prom;
     }
 
-  // #endregion
 
 
   // #endregion
