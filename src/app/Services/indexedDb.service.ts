@@ -59,18 +59,14 @@ export class IndexedDbService {
     return null;
   }
 
-  /**Getting the table of the specified database */
-  public getObjectStore(nameIndexedDb: string, nameObjectStore: string) {
-    // Opening the dtaabase and getting the promise 
-    var request = window.indexedDB.open(nameIndexedDb, 1);
-    // Getting the table of the specified database
-    request.onupgradeneeded = event => {
-      var db = Object.assign(event.target).result;
-      var objectStore = db.objectStore(nameObjectStore)
+    /**Method getting the specified objectstore from the specified database. 
+     * @indexedDb database from which getting the specified objectstore 
+     * @objectName name of the objectstore to get from the database.
+    */
+     public getDbObjectstore(indexesDb, objectName) {
+      const transaction = indexesDb.transaction([objectName]);
+      const objectStore = transaction.objectStore(objectName);
       return objectStore;
-    };
-
-    return null;
   }
 
   // #endregion

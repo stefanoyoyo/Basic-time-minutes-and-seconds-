@@ -13,8 +13,12 @@ export class AppComponent  {
   minutes: number = 20;
   seconds: number = -1;
   constructor(private indexedDb: IndexedDbService) {
-    this.indexedDb.createObjectStore('Database', 'Person', ObjectStoreColumns.getTestModel())
+    // this.indexedDb.createObjectStore('Database', 'Person', ObjectStoreColumns.getTestModel());
+    const obj = this.indexedDb.getDbObjectstore('Database', 'Person');
+    console.log(obj)
+
   }
+
 
   // #region methods
 
