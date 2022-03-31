@@ -6,6 +6,9 @@ import { ObjectStoreColumns } from "../model/objectStoreColumns.model";
 })
 export class IndexedDbService {
 
+  // #region APP CODE
+  /**Region including the code only working in this app. */
+
   public save(toSave: number) {
     const cols: ObjectStoreColumns[] = ObjectStoreColumns.getTestModel()
     // this.createObjectStore('ciao', 'Person', cols  );
@@ -14,7 +17,10 @@ export class IndexedDbService {
     const obj = this.getObjectStore('Database', 'Person');
   }
 
-  // #region API
+  // #endregion
+
+  // #region REUSABLE CODE
+  /** Region of reusable code also working in other projects.  */
 
   public isIndexedDbAvailable(): boolean {
     if (!('indexedDB' in window)) {
