@@ -18,7 +18,13 @@ export class AppComponent  {
   }
 
   async asyncConstructor() {
-    const indexesDb = await this.indexedDb.openDb('Database') as IDBDatabase;
+    const indexesDb: IDBDatabase = await this.indexedDb.openDb('Database') as IDBDatabase;
+
+    const req = window.indexedDB.open('Database');
+    req.onsuccess = (event) => {
+
+    }
+
     const objectStore = this.indexedDb.getDbObjectstore(indexesDb, 'Person') as IDBObjectStore;
     console.log(objectStore);
   }
@@ -37,6 +43,7 @@ export class AppComponent  {
         this.minutes--;
       }
 
+      // TODO
       // this.appComponent.save(new Date().getTime());
 
     }, 1000)

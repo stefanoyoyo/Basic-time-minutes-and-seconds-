@@ -31,16 +31,18 @@ export class IndexedDbService {
         return null;
     }
     /* request type is IDBOpenDBRequest, a promise to resolve */
-    var request = await window.indexedDB.open(name, 1); 
+    var request: IDBOpenDBRequest = window.indexedDB.open(name, 1); 
     /* Resolving the promise in 'request' variable, in order to get its value */
     let el = null;
     const myPromise = new Promise((resolve, reject) => { 
         request.onsuccess = function(event) {
             el = Object.assign(event.target).result;
+            // Async operation succeded. The promise returns the gotten element
             resolve(el);
         };
         request.onerror = function() {
-            reject();
+          // Async operation failed. the promise return an error message. 
+            reject('An error occurred. Try again.');
         }
     });
 
