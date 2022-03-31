@@ -20,10 +20,7 @@ export class AppComponent  {
   async asyncConstructor() {
     const indexesDb: IDBDatabase = await this.indexedDb.openDb('Database') as IDBDatabase;
 
-    const req = window.indexedDB.open('Database');
-    req.onsuccess = (event) => {
-
-    }
+    // this.indexedDb.makeObjectStore(indexesDb, 'Pio');
 
     const objectStore = this.indexedDb.getDbObjectstore(indexesDb, 'Person') as IDBObjectStore;
     console.log(objectStore);

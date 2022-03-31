@@ -57,7 +57,7 @@ export class IndexedDbService {
 
   // #region ObjectStore
 
-  /**Creating table into the specified database */
+  /**Creating the objectStore (table) into the specified indexedDb (database) */
   public createObjectStore(
     nameIndexedDb: string,
     nameObjectStore: string,
@@ -83,6 +83,31 @@ export class IndexedDbService {
       return objectStore;
     };
     return null;
+  }
+
+  /**Method to create an objectStore (table) into the given indexedDb (table) 
+   * DA SISTEMARE: lancia eccezione
+   * ERROR
+      Error: Uncaught (in promise): InvalidStateError: Failed to execute 'createObjectStore' on 'IDBDatabase': The database is not running a version change transaction.
+      Error: Failed to execute 'createObjectStore' on 'IDBDatabase': The database is not running a version change transaction.
+  */
+  public makeObjectStore(
+    db: IDBDatabase,
+    nameObjectStore: string,
+    columns?: ObjectStoreColumns[]
+    ) {
+      var objectStore = db.createObjectStore(nameObjectStore, {
+        keyPath: 'taskTitle',
+      });
+      if (ObjectStoreColumns == null) return objectStore;
+      // define what data items the objectStore will contain
+      columns.forEach((row) => {
+        objectStore.createIndex(row['columnName'], row['columnName'], {
+          unique: row['isUnique'],
+        });
+      });
+
+      return objectStore;
   }
 
   /**Method getting the specified objectstore from the specified database. 
