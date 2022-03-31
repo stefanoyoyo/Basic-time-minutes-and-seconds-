@@ -5,17 +5,6 @@ import { ObjectStoreColumns } from '../model/objectStoreColumns.model';
   providedIn: 'root',
 })
 export class IndexedDbService {
-  // #region APP CODE
-  /**Region including the code only working in this app. */
-
-  public save(toSave: number) {
-    const cols: ObjectStoreColumns[] = ObjectStoreColumns.getTestModel();
-
-    // aggiustare
-    // const obj = this.getDbObjectstore('Database', 'Person');
-  }
-
-  // #endregion
 
   // #region REUSABLE CODE
   /** Region of reusable code also working in other projects.  */

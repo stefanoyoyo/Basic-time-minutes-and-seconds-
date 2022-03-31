@@ -1,5 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import { ObjectStoreColumns } from './model/objectStoreColumns.model';
+import { AppComponentService } from './Services/app.component.service';
 import { IndexedDbService } from './Services/indexedDb.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class AppComponent  {
 
   minutes: number = 20;
   seconds: number = -1;
-  constructor(private indexedDb: IndexedDbService) {
+  constructor(private appComponent: AppComponentService, private indexedDb: IndexedDbService) {
     this.asyncConstructor();
 
 
@@ -42,7 +43,7 @@ export class AppComponent  {
         this.minutes--;
       }
 
-      this.indexedDb.save(new Date().getTime());
+      this.appComponent.save(new Date().getTime());
 
     }, 1000)
   }
