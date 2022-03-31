@@ -16,17 +16,12 @@ export class AppComponent  {
   constructor(private appComponent: AppComponentService, private indexedDb: IndexedDbService) {
     this.asyncConstructor();
 
-
-    // this.indexedDb.createObjectStore('Database', 'Person', ObjectStoreColumns.getTestModel());
-
-    // const obj = this.indexedDb.getDbObjectstore('Database', 'Person');
-    // console.log(obj)
-
   }
 
   async asyncConstructor() {
-    const indexesDb = await this.indexedDb.openDb('Database') as any;
-    console.log(indexesDb);
+    const indexesDb = await this.indexedDb.openDb('Database') as IDBDatabase;
+    const bb = this.indexedDb.GetDbObjectstore(indexesDb, 'Person') as IDBObjectStore;
+    console.log(bb);
   }
 
   // #region methods
@@ -43,7 +38,7 @@ export class AppComponent  {
         this.minutes--;
       }
 
-      this.appComponent.save(new Date().getTime());
+      // this.appComponent.save(new Date().getTime());
 
     }, 1000)
   }

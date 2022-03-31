@@ -80,6 +80,16 @@ export class IndexedDbService {
     return null;
   }
 
+  /**Method getting the specified objectstore from the specified database. 
+  * @indexedDb database from which getting the specified objectstore 
+  * @objectName name of the objectstore to get from the database.
+  */
+  public GetDbObjectstore(indexesDb: IDBDatabase, objectName: string): IDBObjectStore {
+    const transaction = indexesDb.transaction([objectName]);
+    const objectStore = transaction.objectStore(objectName);
+    return objectStore;
+  }
+
     /**Method allowing to get an element from an objectStore object
    * using the specified primary key. 
    * This methos incapsulates an async callback call when 

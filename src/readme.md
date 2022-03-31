@@ -21,3 +21,5 @@ MANCA:
  • codice per eliminazione dati di una tabella
  • codice per eliminazione tabella 
  • codice per eliminazione indexedDb 
+
+CONTINUARE L'OTTENIMENTO DEL OBJECT DB
