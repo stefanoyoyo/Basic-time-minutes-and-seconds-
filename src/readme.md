@@ -13,3 +13,9 @@ Devo capire come usarlo in ionic (quando non voglio usare lo storage).
 
 L'alternativa a questo sarebbe creare uno shared worker ch esegua 
 il timer, che non dovrebbe essere mai interrotto.
+
+MANCA: 
+ • codice per agguinta dati all'indexedDb
+ • codice per eliminazione dati di una tabella
+ • codice per eliminazione tabella 
+ • codice per eliminazione indexedDb 
