@@ -8,11 +8,11 @@ export class AppComponentService {
 
   /**Region including the code only working in this app. */
 
-  public save(toSave: number) {
+  public save(time: number) {
     const cols: ObjectStoreColumns[] = ObjectStoreColumns.getTestModel();
 
     // aggiustare
-    // const obj = this.getDbObjectstore('Database', 'Person');
+    // const obj = this.getDbObjectstore('Database', 'Times');
   }
 
 
