@@ -25,7 +25,7 @@ export class IndexedDbService {
   }
 
   /* Method returning a promise to resolve. */
-  public async openDb(name): Promise<unknown> {
+  public async openDb(name: string): Promise<unknown> {
     if (!window.indexedDB) {
         console.log("Your browser doesn't support a stable version of IndexedDB.");
         return null;
