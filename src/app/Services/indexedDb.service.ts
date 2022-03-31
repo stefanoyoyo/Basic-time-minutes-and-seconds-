@@ -24,7 +24,7 @@ export class IndexedDbService {
     return true;
   }
 
-  /**Metodo per creare l'indexedDb (il database) */
+  /**Method to create an IndexedDB (i.e. the database) */
   public createIndexedDb(dbName: string) {
     return window.indexedDB.open(dbName, 1);
   }
