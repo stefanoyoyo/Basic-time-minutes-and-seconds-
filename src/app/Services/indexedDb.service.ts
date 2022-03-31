@@ -11,7 +11,7 @@ export class IndexedDbService {
     // this.createObjectStore('ciao', 'Person', cols  );
 
     // aggiustare
-    const obj = this.getObjectStore('ciao', 'Person');
+    const obj = this.getObjectStore('Database', 'Person');
   }
 
   // #region API
@@ -22,6 +22,11 @@ export class IndexedDbService {
       return false;
     }
     return true;
+  }
+
+  /**Metodo per creare l'indexedDb (il database) */
+  public createIndexedDb(dbName: string) {
+    return window.indexedDB.open(dbName, 1);
   }
 
   /**Creating table into the specified database */
@@ -48,19 +53,19 @@ export class IndexedDbService {
     return null;
   }
 
-    /**Getting the table of the specified database */
-    public getObjectStore(nameIndexedDb: string, nameObjectStore: string) {
-      // Opening the dtaabase and getting the promise 
-      var request = window.indexedDB.open(nameIndexedDb, 1);
-      // Getting the table of the specified database
-      request.onupgradeneeded = event => {
-        var db = Object.assign(event.target).result;
-        var objectStore = db.objectStore(nameObjectStore)
-        return objectStore;
-      };
+  /**Getting the table of the specified database */
+  public getObjectStore(nameIndexedDb: string, nameObjectStore: string) {
+    // Opening the dtaabase and getting the promise 
+    var request = window.indexedDB.open(nameIndexedDb, 1);
+    // Getting the table of the specified database
+    request.onupgradeneeded = event => {
+      var db = Object.assign(event.target).result;
+      var objectStore = db.objectStore(nameObjectStore)
+      return objectStore;
+    };
 
-      return null;
-    }
+    return null;
+  }
 
   // #endregion
 

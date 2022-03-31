@@ -1,4 +1,5 @@
 import { Component, VERSION } from '@angular/core';
+import { ObjectStoreColumns } from './model/objectStoreColumns.model';
 import { IndexedDbService } from './Services/indexedDb.service';
 
 @Component({
@@ -11,7 +12,9 @@ export class AppComponent  {
 
   minutes: number = 20;
   seconds: number = -1;
-  constructor(private indexedDb: IndexedDbService) {}
+  constructor(private indexedDb: IndexedDbService) {
+    this.indexedDb.createObjectStore('Database', 'Person', ObjectStoreColumns.getTestModel())
+  }
 
   // #region methods
 
