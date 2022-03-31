@@ -1,17 +1,15 @@
-import { Injectable } from "@angular/core";
-import { ObjectStoreColumns } from "../model/objectStoreColumns.model";
+import { Injectable } from '@angular/core';
+import { ObjectStoreColumns } from '../model/objectStoreColumns.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IndexedDbService {
-
   // #region APP CODE
   /**Region including the code only working in this app. */
 
   public save(toSave: number) {
-    const cols: ObjectStoreColumns[] = ObjectStoreColumns.getTestModel()
-    // this.createObjectStore('ciao', 'Person', cols  );
+    const cols: ObjectStoreColumns[] = ObjectStoreColumns.getTestModel();
 
     // aggiustare
     // const obj = this.getDbObjectstore('Database', 'Person');
@@ -24,41 +22,105 @@ export class IndexedDbService {
 
   public isIndexedDbAvailable(): boolean {
     if (!('indexedDB' in window)) {
-      console.log('This browser doesn\'t support IndexedDB');
+      console.log("This browser doesn't support IndexedDB");
       return false;
     }
     return true;
   }
+  
+  // #region indexedDb
 
   /**Method to create an IndexedDB (i.e. the database) */
   public createIndexedDb(dbName: string) {
     return window.indexedDB.open(dbName, 1);
   }
 
+  /* Method returning a promise to resolve. */
+  public async openDb(name) {
+    if (!window.indexedDB) {
+        console.log("Your browser doesn't support a stable version of IndexedDB.");
+        return null;
+    }
+
+    /* request type is IDBOpenDBRequest */
+    var request = window.indexedDB.open(name, 1); 
+
+    let el = null;
+    const myPromise = new Promise((resolve, reject) => { 
+        request.onsuccess = function(event) {
+            el = Object.assign(event.target).result;
+            resolve(el);
+        };
+        request.onerror = function() {
+            reject();
+        }
+    });
+
+    return myPromise;
+ }
+
+  // #endregion 
+
+  // #region ObjectStore
+
   /**Creating table into the specified database */
-  public createObjectStore(nameIndexedDb: string, nameObjectStore: string, columns?: ObjectStoreColumns[] ) {
-    // Opening the dtaabase and getting the promise 
+  public createObjectStore(
+    nameIndexedDb: string,
+    nameObjectStore: string,
+    columns?: ObjectStoreColumns[]
+  ) {
+    // Opening the dtaabase and getting the promise
     var request = window.indexedDB.open(nameIndexedDb, 1);
-    // This handler is called when a new version of the database
-    // is created, either when one has not been created before
-    // or when a new version number is submitted by calling
-    // window.indexedDB.open().
     // This handler is only supported in recent browsers.
-    request.onupgradeneeded = event => {
+    request.onupgradeneeded = (event) => {
       var db = Object.assign(event.target).result;
       // Create an objectStore for this database
-      var objectStore = db.createObjectStore(nameObjectStore, { keyPath: "taskTitle" });
+      var objectStore = db.createObjectStore(nameObjectStore, {
+        keyPath: 'taskTitle',
+      });
       if (ObjectStoreColumns == null) return objectStore;
       // define what data items the objectStore will contain
-      columns.forEach(row => {
-        objectStore.createIndex(row['columnName'], row['columnName'], { unique: row['isUnique'] });
+      columns.forEach((row) => {
+        objectStore.createIndex(row['columnName'], row['columnName'], {
+          unique: row['isUnique'],
+        });
       });
-      
+
       return objectStore;
     };
     return null;
   }
 
+    /**Method allowing to get an element from an objectStore object
+   * using the specified primary key. 
+   * This methos incapsulates an async callback call when 
+   * onsuccess event is triggered into a promise. 
+   * This allows to resolve the promise in OOP style.
+   * @objectStore database object from which getting data
+   * @elementPrimaryKey string representing the primary key of the element to get from the object.
+   */
+    public async getObjectElement(objectStore, elementPrimaryKey) {
+      var objectStore2 = objectStore.get(elementPrimaryKey);
+      let element = null;
+      const prom = new Promise((resolve, reject) => {
+          objectStore2.onsuccess = function(event) {
+              if(objectStore2.result) {
+                console.log('success message!');
+                element = objectStore2.result;
+                resolve(element);
+              } else {
+                console.log('error message!');  
+                element = null;
+                resolve(element);
+              }
+            };
+      });
+
+      return prom;
+    }
+
   // #endregion
 
+
+  // #endregion
 }

@@ -13,14 +13,20 @@ export class AppComponent  {
   minutes: number = 20;
   seconds: number = -1;
   constructor(private indexedDb: IndexedDbService) {
+    this.asyncConstructor();
+
+
     // this.indexedDb.createObjectStore('Database', 'Person', ObjectStoreColumns.getTestModel());
 
-    
     // const obj = this.indexedDb.getDbObjectstore('Database', 'Person');
     // console.log(obj)
 
   }
 
+  async asyncConstructor() {
+    const indexesDb = await this.indexedDb.openDb('Database') as any;
+    console.log(indexesDb);
+  }
 
   // #region methods
 
