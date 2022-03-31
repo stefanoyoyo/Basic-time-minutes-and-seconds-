@@ -26,14 +26,14 @@ export class IndexedDbService {
 
   /* Method returning a promise to resolve. */
   public async openDb(name: string): Promise<unknown> {
+    /* Checking if the dbIndex is available  */
     if (!window.indexedDB) {
         console.log("Your browser doesn't support a stable version of IndexedDB.");
         return null;
     }
-
     /* request type is IDBOpenDBRequest, a promise to resolve */
     var request = window.indexedDB.open(name, 1) as IDBOpenDBRequest; 
-
+    /* Resolving the promise in 'request' variable, in order to get its value */
     let el = null;
     const myPromise = new Promise((resolve, reject) => { 
         request.onsuccess = function(event) {
