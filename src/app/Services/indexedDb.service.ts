@@ -31,7 +31,7 @@ export class IndexedDbService {
         return null;
     }
     /* request type is IDBOpenDBRequest, a promise to resolve */
-    var request = window.indexedDB.open(name, 1) as IDBOpenDBRequest; 
+    var request = await window.indexedDB.open(name, 1); 
     /* Resolving the promise in 'request' variable, in order to get its value */
     let el = null;
     const myPromise = new Promise((resolve, reject) => { 
@@ -83,7 +83,7 @@ export class IndexedDbService {
   * @indexedDb database from which getting the specified objectstore 
   * @objectName name of the objectstore to get from the database.
   */
-  public GetDbObjectstore(indexesDb: IDBDatabase, objectName: string): IDBObjectStore {
+  public getDbObjectstore(indexesDb: IDBDatabase, objectName: string): IDBObjectStore {
     const transaction = indexesDb.transaction([objectName]);
     const objectStore = transaction.objectStore(objectName);
     return objectStore;
