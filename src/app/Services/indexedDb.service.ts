@@ -14,7 +14,7 @@ export class IndexedDbService {
     // this.createObjectStore('ciao', 'Person', cols  );
 
     // aggiustare
-    const obj = this.getObjectStore('Database', 'Person');
+    // const obj = this.getDbObjectstore('Database', 'Person');
   }
 
   // #endregion
@@ -57,16 +57,6 @@ export class IndexedDbService {
       return objectStore;
     };
     return null;
-  }
-
-    /**Method getting the specified objectstore from the specified database. 
-     * @indexedDb database from which getting the specified objectstore 
-     * @objectName name of the objectstore to get from the database.
-    */
-     public getDbObjectstore(indexesDb, objectName) {
-      const transaction = indexesDb.transaction([objectName]);
-      const objectStore = transaction.objectStore(objectName);
-      return objectStore;
   }
 
   // #endregion

@@ -14,8 +14,10 @@ export class AppComponent  {
   seconds: number = -1;
   constructor(private indexedDb: IndexedDbService) {
     // this.indexedDb.createObjectStore('Database', 'Person', ObjectStoreColumns.getTestModel());
-    const obj = this.indexedDb.getDbObjectstore('Database', 'Person');
-    console.log(obj)
+
+    
+    // const obj = this.indexedDb.getDbObjectstore('Database', 'Person');
+    // console.log(obj)
 
   }
 
